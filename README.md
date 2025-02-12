@@ -135,7 +135,6 @@ Random Forest is an **ensemble learning method** that builds multiple decision t
 
 ### 📊 **Mathematical Concepts**  
 
-![Gini and Entropy](latex_equations_plot.png)
 
 
 #### 🔹 **Gini Impurity**  
