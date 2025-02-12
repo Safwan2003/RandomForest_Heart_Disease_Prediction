@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 
 # Load the pipeline
-pipeline = joblib.load("../model/heart_disease_pipeline.pkl")
+pipeline = joblib.load("./model/heart_disease_pipeline.pkl")
 
 # Streamlit UI
 st.title("Heart Disease Prediction")
