@@ -130,16 +130,30 @@ Random Forest is an **ensemble learning method** that builds multiple decision t
 - **Feature Randomness**: At each split, a random subset of features is considered to reduce correlation between trees.  
 - **Majority Voting**: For classification, the final prediction is based on the majority vote across all trees.  
 
-### Mathematical Concepts  
-
-- **Gini Impurity**: Used to measure the quality of splits in decision trees.  
-  \[ G = 1 - \sum p_i^2 \]  
-  Where \( p_i \) is the probability of class \( i \).  
-
-- **Entropy** (for some cases):  
-  \[ H = -\sum p_i \log(p_i) \]  
 
 ---
+
+### 📊 **Mathematical Concepts**  
+
+#### 🔹 **Gini Impurity**  
+Used to measure the quality of splits in decision trees. Lower Gini values indicate purer splits.  
+Formula:  
+\[ G = 1 - \sum p_i^2 \]  
+Where \( p_i \) is the probability of class \( i \).  
+
+**Example:**  
+- If data is perfectly split into one class, \( G = 0 \).  
+- If the data is evenly split between two classes, \( G = 0.5 \).  
+
+#### 🔹 **Entropy**  
+Entropy measures the randomness or disorder in the data. It’s used for information gain in decision trees.  
+Formula:  
+\[ H = -\sum p_i \log_2(p_i) \]  
+
+**Example:**  
+- When all samples belong to a single class, \( H = 0 \).  
+- When samples are evenly split between classes, \( H = 1 \).  
+
 
 ## 📂 Repository Structure  
 
@@ -148,10 +162,12 @@ Random Forest is an **ensemble learning method** that builds multiple decision t
 |   |-- heart_2020_cleaned.csv  
 |  
 |-- src/                     # Source code folder  
-|   |-- train_model.py        # Training and evaluation script  
+|   |-- requirements.txt     #contain required libraries for streamlit deployment        
+|   |-- index.ipynb        # Training and evaluation script
+|   |-- app.py  # streamlit application        
 |  
-|-- model/                   # Trained model folder  
-|   |-- saved_model.pkl       # Saved model file  
+|   | model/                   # Trained model folder  
+|     |-- saved_model.pkl       # Saved model file  
 |  
 |-- README.md                # Project documentation  
 ```  
@@ -162,7 +178,6 @@ Random Forest is an **ensemble learning method** that builds multiple decision t
 
 - **Hyperparameter Tuning**: Improve the model with advanced optimization techniques.  
 - **Explore Other Classifiers**: Compare Random Forest with XGBoost and Neural Networks.  
-- **Model Deployment**: Deploy the model using a web-based interface (Flask, Streamlit).  
 
 ---
 
@@ -176,5 +191,3 @@ Random Forest is an **ensemble learning method** that builds multiple decision t
 - **LinkedIn**: [Safwan Ali](https://www.linkedin.com/in/safwan-ali-281aa1275/)  
 
 ---
-
-Let me know if you want me to generate the **confusion matrix** and **feature importance plots** or help with model deployment! 😊
