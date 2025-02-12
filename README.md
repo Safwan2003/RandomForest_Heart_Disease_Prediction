@@ -1,116 +1,180 @@
-Here's the updated **README.md** with **Binning** included in the data preprocessing section:  
 
 ---
 
-# Heart Disease Prediction using Random Forest  
+# Heart Disease Prediction with Random Forest Classifier  
 
-## Project Overview  
-This project aims to predict heart disease using the **Random Forest Classifier**. It uses the **Heart Disease 2020 Cleaned dataset**, performs data preprocessing (including binning), and applies machine learning to classify individuals based on their health attributes.  
-
----
-
-## Dataset  
-The dataset used is `heart_2020_cleaned.csv`, which contains health-related features like age, BMI, smoking habits, physical activity, and general health condition. The target variable is `HeartDisease`, indicating whether a person has heart disease (`Yes` or `No`).  
+This project focuses on predicting heart disease using a **Random Forest Classifier**. The dataset consists of various health indicators, and the goal is to preprocess the data, handle class imbalance, and build a model for accurate heart disease prediction.  
 
 ---
 
-## Data Preprocessing  
-1. **Handling Categorical Data**: Encoded categorical variables using `LabelEncoder`.  
-2. **Replacing Values**: Converted `Yes/No` responses into `1/0`, transformed age ranges into numerical values.  
-3. **Feature Scaling**: Used `MinMaxScaler` to normalize numerical data.  
-4. **Binning**: Applied binning on continuous features like `BMI` and `AgeCategory` to reduce noise and group values into intervals.  
-   - **AgeCategory** was binned into ranges such as `Young`, `Middle-aged`, and `Senior`.  
-   - **BMI** was grouped into categories like `Underweight`, `Normal`, `Overweight`, and `Obese`.  
-5. **Feature Selection**: Selected correlated features based on Pearson correlation.  
+## 🚀 Project Overview  
+
+- **Dataset**: `heart_2020_cleaned.csv`  
+- **Model**: Random Forest Classifier  
+- **Tech Stack**: Python, NumPy, Pandas, Scikit-learn, Matplotlib, Seaborn  
+- **Evaluation Metrics**: Accuracy, Precision, Recall, F1 Score  
 
 ---
 
-## How Random Forest Works  
-Random Forest is an ensemble learning method that operates by constructing multiple decision trees during training and outputs the class that is the mode of the classes predicted by individual trees.  
+## 📊 Dataset Description  
 
-Key steps:  
-1. **Bootstrapping**: The algorithm selects multiple random subsets of data to train decision trees.  
-2. **Feature Selection**: Each tree is trained on a random subset of features, ensuring diversity.  
-3. **Voting Mechanism**: For classification tasks, the final prediction is determined by majority voting.  
-4. **Averaging**: For regression, the final prediction is the average of outputs from individual trees.  
+The dataset contains **319,795 entries** and **18 features**, representing various health indicators:  
 
----
-
-## Pros and Cons of Random Forest  
-
-### **Pros**  
-- **High Accuracy**  
-- **Handles Missing Values**  
-- **Feature Importance**  
-- **Resistant to Noise**  
-- **Scales Well with Large Datasets**  
-
-### **Cons**  
-- **Computationally Expensive**  
-- **Harder to Interpret**  
-- **Slow Prediction Time**  
-- **Possible Overfitting**  
-
----
-
-## Model Training  
-- **Random Forest Classifier** with `100` estimators.  
-- Dataset split: **70% Training, 30% Testing**.  
-- **Accuracy Achieved**: **91.2%**  
+| Feature           | Description                      |
+|-------------------|----------------------------------|
+| **HeartDisease**  | Target variable (Yes/No)         |
+| **BMI**           | Body Mass Index                  |
+| **Smoking**       | Smoking status (Yes/No)          |
+| **AlcoholDrinking** | Alcohol consumption (Yes/No)   |
+| **Stroke**        | History of stroke (Yes/No)       |
+| **PhysicalHealth** | Days of poor physical health    |
+| **MentalHealth**  | Days of poor mental health       |
+| **DiffWalking**   | Difficulty walking (Yes/No)      |
+| **Sex**           | Male/Female                      |
+| **AgeCategory**   | 13 age groups (18–24 to 80+)     |
+| **Race**          | Ethnicity                        |
+| **Diabetic**      | Diabetes diagnosis status        |
+| **PhysicalActivity** | Physical activity in last 30 days |
+| **GenHealth**     | Self-rated health (Excellent–Poor) |
+| **SleepTime**     | Average hours of sleep per day   |
+| **Asthma**        | Asthma diagnosis (Yes/No)        |
+| **KidneyDisease** | Kidney disease diagnosis (Yes/No)|
+| **SkinCancer**    | Skin cancer diagnosis (Yes/No)   |
 
 ---
 
-## How to Run the Project  
+## ⚙️ Project Workflow  
 
-### Prerequisites  
-Ensure you have Python installed along with the required dependencies.  
+### 1. Data Preprocessing  
 
-### Install Dependencies  
-```bash  
-pip install pandas numpy scikit-learn  
-```  
+- **Label Encoding** for categorical features (`GenHealth`, `Race`, etc.).  
+- **Binary Conversion**: Converted `Yes/No` to `1/0`.  
+- **Age Binning**: Grouped `AgeCategory` into broader groups (Young, Middle-aged, Senior).  
+- **Feature Selection**: Retained highly correlated features using correlation heatmaps.  
 
-### Run the Notebook  
-1. Navigate to the `src` folder.  
-2. Open `index.ipynb` in Jupyter Notebook.  
-3. Run the notebook cells step by step.  
+### 2. Handling Class Imbalance  
 
----
+- Used **RandomUnderSampler** from `imblearn` to balance the dataset, ensuring the model does not favor the majority class (No Heart Disease).  
 
-## Model Evaluation  
-- **Metric Used**: Accuracy Score  
-- **Accuracy Achieved**: `91.2%`  
+### 3. Model Development  
+
+- **Train-Test Split**: 80% training, 20% testing.  
+- **Pipeline**: Included `MinMaxScaler` and `RandomForestClassifier`.  
 
 ---
 
-## Repository Structure  
+## 📈 Model Performance  
+
+| Metric         | Score  |
+|----------------|--------|
+| **Accuracy**   | 72.38% |
+| **Precision**  | 20%    |
+| **Recall**     | 73%    |
+| **F1 Score**   | 31%    |
+
+### Classification Report  
+
+| Class | Precision | Recall | F1 Score | Support  |
+|-------|-----------|--------|----------|----------|
+| **0 (No Heart Disease)** | 0.97 | 0.72 | 0.83 | 204,773 |
+| **1 (Heart Disease)**    | 0.20 | 0.73 | 0.31 | 19,083  |
+
+### 🔍 Interpretation of Metrics  
+
+- **Precision**: Of all predicted heart disease cases, only 20% were correct.  
+- **Recall**: The model correctly identified 73% of actual heart disease cases.  
+- **F1 Score**: A balance between precision and recall, reflecting the trade-off between false positives and false negatives.  
+- **Accuracy**: The model correctly predicted the outcome 72.38% of the time.  
+
+---
+
+## 📊 Visualizations  
+
+
+### Feature Importance  
+![Feature Importance](./assets/feature_importance.png)  
+
+
+---
+
+## 🛠️ Installation & Usage  
+
+1. **Clone the Repository**  
+   ```bash
+   git clone https://github.com/username/heart-disease-prediction.git
+   cd heart-disease-prediction
+   ```  
+
+2. **Install Dependencies**  
+   ```bash
+   pip install -r requirements.txt
+   ```  
+
+3. **Run the Preprocessing and Training Script**  
+   ```bash
+   python train_model.py
+   ```  
+
+4. **Evaluate the Model**  
+   - The trained model is saved using `joblib` for future use.  
+
+---
+
+## 🔍 Understanding Random Forest Classifier  
+
+### What is Random Forest?  
+
+Random Forest is an **ensemble learning method** that builds multiple decision trees and combines their results to improve accuracy and reduce overfitting.  
+
+- **Bagging (Bootstrap Aggregating)**: Each tree is built using a random subset of the training data.  
+- **Feature Randomness**: At each split, a random subset of features is considered to reduce correlation between trees.  
+- **Majority Voting**: For classification, the final prediction is based on the majority vote across all trees.  
+
+### Mathematical Concepts  
+
+- **Gini Impurity**: Used to measure the quality of splits in decision trees.  
+  \[ G = 1 - \sum p_i^2 \]  
+  Where \( p_i \) is the probability of class \( i \).  
+
+- **Entropy** (for some cases):  
+  \[ H = -\sum p_i \log(p_i) \]  
+
+---
+
+## 📂 Repository Structure  
+
 ```
-|-- data/                    # Folder containing dataset  
+|-- data/                    # Dataset folder  
 |   |-- heart_2020_cleaned.csv  
 |  
-|-- src/                     # Folder containing source code  
-|   |-- index.ipynb  
+|-- src/                     # Source code folder  
+|   |-- train_model.py        # Training and evaluation script  
 |  
-|-- model/                   # Folder containing trained model  
-|   |-- saved_model.pkl  
+|-- model/                   # Trained model folder  
+|   |-- saved_model.pkl       # Saved model file  
 |  
-|-- README.md                # Documentation  
+|-- README.md                # Project documentation  
 ```  
 
 ---
 
-## Future Improvements  
-- Implement other classifiers like Logistic Regression and SVM for comparison.  
-- Optimize feature selection to improve performance.  
-- Deploy the model using Flask or Streamlit for real-world applications.  
+## 🌟 Future Work  
+
+- **Hyperparameter Tuning**: Improve the model with advanced optimization techniques.  
+- **Explore Other Classifiers**: Compare Random Forest with XGBoost and Neural Networks.  
+- **Model Deployment**: Deploy the model using a web-based interface (Flask, Streamlit).  
 
 ---
 
-## Author  
-**Safwan Ali** – Data Science Enthusiast  
+## ✍️ Author  
+
+**Safwan Ali** – Data Science Enthusiast & Developer  
 
 ### Connect with Me  
+
 - **GitHub**: [Safwan2003](https://github.com/Safwan2003)  
 - **LinkedIn**: [Safwan Ali](https://www.linkedin.com/in/safwan-ali-281aa1275/)  
 
 ---
+
+Let me know if you want me to generate the **confusion matrix** and **feature importance plots** or help with model deployment! 😊
