@@ -135,6 +135,9 @@ Random Forest is an **ensemble learning method** that builds multiple decision t
 
 ### 📊 **Mathematical Concepts**  
 
+![Gini and Entropy](latex_equations_plot.png)
+
+
 #### 🔹 **Gini Impurity**  
 Used to measure the quality of splits in decision trees. Lower Gini values indicate purer splits.  
 Formula:  
@@ -163,8 +166,8 @@ Formula:
 |  
 |-- src/                     # Source code folder  
 |   |-- requirements.txt     #contain required libraries for streamlit deployment        
-|   |-- index.ipynb        # Training and evaluation script
-|   |-- app.py  # streamlit application        
+|   |-- index.ipynb          # Training and evaluation script
+|   |-- app.py               # streamlit application        
 |  
 |   | model/                   # Trained model folder  
 |     |-- saved_model.pkl       # Saved model file  
