@@ -2,8 +2,11 @@ import streamlit as st
 import pandas as pd
 import joblib
 
+import os
+model_path = os.path.join(os.path.dirname(__file__), "model", "heart_disease_pipeline.pkl")
+
 # Load the pipeline
-pipeline = joblib.load("model/heart_disease_pipeline.pkl")
+pipeline = joblib.load(model_path)
 
 # Streamlit UI
 st.title("Heart Disease Prediction")
